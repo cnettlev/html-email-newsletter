@@ -2,6 +2,7 @@
 import csv
 from datetime import datetime
 from categorized_info import categorized_info
+from utils import downloadFiles
 
 # Define constants
 DATE_FORMAT = "%d-%m-%Y"
@@ -36,6 +37,7 @@ for news in news_data:
     if news_date >= datetime.strptime(DATE_FROM, DATE_FORMAT):
         section = news.get('El contenido que deseas compartir es', 'Otros')
         categorized_news[section].append(news)
+        downloadFiles(news)
 
 # Filter news based on date
 # filtered_news = {section: [] for section in categorized_news}
@@ -97,6 +99,7 @@ with open('newsletter.html', 'w') as html_file:
 #                        <p>{news['Content']}</p>
 #                    </div>
 #                '''
+
                 if news_i % 2 == 0:
                     html_content += f'''
                         </div>
